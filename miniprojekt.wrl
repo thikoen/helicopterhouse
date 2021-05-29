@@ -1,0 +1,766 @@
+#VRML V2.0 utf8
+
+EXTERNPROTO Hubschrauber [
+  exposedField SFColor mainColor
+  exposedField SFColor secondColor
+  ] "Hubschrauber.wrl#Hubschrauber"
+
+Background {
+skyAngle [ 1.2 1.57]
+topUrl "bg.jpg"
+bottomUrl "bg.jpg"
+backUrl "bg.jpg"
+rightUrl "bg.jpg"
+leftUrl "bg.jpg"
+frontUrl "bg.jpg"
+}
+
+DEF Headlight NavigationInfo
+{
+   headlight TRUE
+}
+
+Viewpoint {
+ description "Vogelperspektive"
+ orientation 1 0 0 -1.57
+ position 0 40 0
+}
+
+Viewpoint {
+ description "Dach"
+ orientation 0 1 0 1.2
+ position 6 1 2
+}
+
+Viewpoint {
+ description "Wald"
+ orientation 0 1 0 2.1
+ position -15 -19 0
+}
+
+Viewpoint {
+ description "Eingang"
+ orientation 0 1 0 -2
+ position -23 -19 0
+}
+
+Viewpoint {
+description "Close von Oben"
+orientation 1 0 0 -1.57
+position -3 19 0
+}
+
+Appearance {
+	material Material {}
+		texture ImageTexture {
+		url "wiese.jpg"
+		repeatS TRUE
+		repeatT TRUE
+	}
+}
+
+Transform {
+	#Wiese + Krankenhaus + Hubschrauber
+	rotation 1 0 0 -1.57
+	children [
+		Transform {
+			rotation 1 0 0 1.57
+			translation -30 0 -19
+			#Was auf der Wiese wächst
+			children[
+			DEF BaumLaub Transform{
+				translation 5 0 5
+				#Gesamter Baum Typ Laub
+				children [
+				Transform {
+					translation 0 2 0
+					children[
+						Shape {
+							#Baumkrone Laubbaum
+					 		geometry Sphere   {
+								radius 2
+					 		}
+              appearance Appearance{
+      					texture ImageTexture {
+      						url "Blaetter.jpg"
+      					}
+      				}
+				 		}
+					]
+				}
+				 Transform {
+				 	children [
+					 Shape {
+						 #Baumstamm Laubbaum
+						 geometry Cylinder {
+							 radius 0.6
+							 height 3
+						 }
+             appearance Appearance{
+               texture ImageTexture {
+                 url "Stamm.jpg"
+               }
+             }
+					 }
+					]
+				}
+			]
+		}
+		Transform {
+			#Laubbaum 1
+			translation 5 0 15
+			children [
+				USE BaumLaub
+			]
+		}
+		Transform {
+			#Laubbaum 2
+			translation -10 0 -22
+			children [
+				USE BaumLaub
+			]
+		}
+		Transform {
+			#Laubbaum 3
+			translation 15 0 18
+			children [
+				USE BaumLaub
+			]
+		}
+		Transform {
+			#Laubbaum 3
+			translation -6 0 14
+			children [
+				USE BaumLaub
+			]
+		}
+				DEF Baum Transform{
+					#Gesamter Baum Typ Fichte
+					children [
+						Shape {
+							#Baumstamm Fichte
+							geometry Cylinder {
+								radius 0.4
+								height 3
+							}
+              appearance Appearance{
+      					texture ImageTexture {
+      						url "Stamm.jpg"
+      					}
+      				}
+						}
+						Transform {
+							#Baumkrone Fichte unten
+							translation 0 2 0
+							children [
+								DEF Baumkrone Shape {
+									geometry Cone {
+										bottomRadius 2
+										height 3.5
+									}
+                  appearance Appearance{
+          					texture ImageTexture {
+          						url "Nadeln.jpg"
+          					}
+          				}
+								}
+							]
+						}
+						Transform {
+							#Baumkrone Fichte oben
+							translation 0 3 0
+							children [
+								USE Baumkrone
+							]
+						}
+					]
+				}
+				Transform {
+					#Baum (Fichte) 2
+					translation 5 0 10
+					children [
+						USE Baum
+					]
+				}
+				Transform {
+					#Baum (Fichte) 3
+					translation 8 0 8
+					children [
+						USE Baum
+					]
+				}
+				Transform {
+					#Baum (Fichte) 4
+					translation 8 0 16
+					children [
+						USE Baum
+					]
+				}
+				Transform {
+					#Baum (Fichte) 5
+					translation -4 0 -11
+					children [
+						USE Baum
+					]
+				}
+			]
+		}
+    Transform {
+			#Säule rechts unten vom Krankenhaus
+			translation 7 -7 7
+			children [
+    		Shape {
+					appearance Appearance{
+						texture ImageTexture {
+							url "wand.jpg"
+						}
+					}
+				geometry Box {
+					size 0.5 0.5 15
+				}
+    	}
+  	]
+	}
+  Transform {
+    #Säule links unten vom Krankenhaus
+    translation -17 -7 7
+    children [
+      Shape {
+        appearance Appearance{
+          texture ImageTexture {
+            url "wand.jpg"
+          }
+        }
+      geometry Box {
+        size 0.5 0.5 15
+      }
+    }
+  ]
+}
+Transform {
+  #Säule links oben vom Krankenhaus
+  translation -17 7 7
+  children [
+    Shape {
+      appearance Appearance{
+        texture ImageTexture {
+          url "wand.jpg"
+        }
+      }
+    geometry Box {
+      size 0.5 0.5 15
+    }
+  }
+]
+}
+Transform {
+  #Säule rechts oben vom Krankenhaus
+  translation 7 7 7
+  children [
+    Shape {
+      appearance Appearance{
+        texture ImageTexture {
+          url "wand.jpg"
+        }
+      }
+    geometry Box {
+      size 0.5 0.5 15
+    }
+  }
+]
+}
+		Transform {
+			#Krankenhaus
+			translation -5 0 -10.5
+			children [
+    		Shape {
+        appearance Appearance{
+          texture ImageTexture {
+            url "wand.jpg"
+          }
+					}
+				geometry Box {
+					size 25 15 20
+				}
+    	}
+  	]
+	}
+	Transform {
+		#Wiese
+  	children [
+    	Shape {
+				appearance Appearance{
+					texture ImageTexture {
+						url "wiese.jpg"
+					}
+				}
+	      geometry IndexedFaceSet {
+					coord Coordinate { point	[
+						15 -25 -20.6 #Rechte untere Ecke
+						10 25 -20.6 #Rechte obere Ecke
+						-35 25 -20.6 #Linke untere Ecke
+						-40 -25 -20.6 #Linke obere Ecke
+					]
+				}
+				coordIndex [0 1 2 3 -1]
+				}
+    	}
+		]
+	}
+
+  Group {
+    children [
+      #Schalter für Nachtszenario
+        Transform {
+          translation 7 -10 16
+          children [
+            DEF SchalterNachszenario TouchSensor { }
+            Shape {
+              appearance Appearance {
+                material Material { diffuseColor 0 0 1}
+              }
+              geometry Sphere {radius 1}
+            }
+          ]
+        }
+
+      #Schalter für Licht (Kugel)
+      DEF SchalterZustand Script{
+        #Script für Merken des Zustandes
+        eventIn SFBool isClicked
+        eventOut SFBool isOn
+        url "javascript:
+                function initialize(){isOn=false;}
+                function isClicked(value, timestamp){
+                  if(value){isOn=!isOn;}
+                }
+              "
+      }
+      DEF SchalterNachszenarioZustand Script{
+        #Script für Merken des Zustandes
+        eventIn SFBool isClicked
+        eventOut SFBool isOn
+        eventOut SFBool headlightOn
+        url "javascript:
+                function initialize(){isOn=false; headlightOn=true;}
+                function isClicked(value, timestamp){
+                  if(value){isOn=!isOn; headlightOn=!headlightOn;}
+                }
+              "
+      }
+      Transform {
+        translation 7 -7 16
+        children [
+          DEF Schalter TouchSensor { }
+          Shape {
+            appearance Appearance {
+              material Material { diffuseColor 1 0 0}
+            }
+            geometry Sphere {radius 1}
+          }
+        ]
+      }
+      Transform {
+  		#Licht unten links
+  		translation -17 -7 7
+  		children [
+        DEF Licht1 SpotLight {
+        on FALSE
+        intensity 1.0
+        ambientIntensity 0.0
+        color 1 1 0
+        location 0.0 0.0 0.0
+        radius 10.0
+        attenuation 1.0 0.0 0.0
+        }
+  		]
+  	}
+    Transform {
+  		#Licht unten rechts
+  		translation 7 -7 7
+  		children [
+        DEF Licht2 SpotLight {
+        on FALSE
+        intensity 1.0
+        ambientIntensity 0.0
+        color 1 1 0
+        location 0.0 0.0 0.0
+        radius 10.0
+        attenuation 1.0 0.0 0.0
+        }
+  		]
+  	}
+  Transform {
+  		#Licht oben links
+  		translation -17 7 7
+  		children [
+        DEF Licht3 SpotLight {
+        on FALSE
+        intensity 1.0
+        ambientIntensity 0.0
+        color 1 1 0
+        location 0.0 0.0 0.0
+        radius 10.0
+        attenuation 1.0 0.0 0.0
+        }
+  		]
+  	}
+    Transform {
+  		#Licht oben rechts
+  		translation 7 7 7
+  		children [
+        DEF Licht4 SpotLight {
+        on FALSE
+        intensity 1.0
+        ambientIntensity 0.0
+        color 1 1 0
+        location 0.0 0.0 0.0
+        radius 10.0
+        attenuation 1.0 0.0 0.0
+        }
+  		]
+  	}
+    ]
+
+    #Logik des Lichtschalters
+    ROUTE Schalter.isActive TO SchalterZustand.isClicked
+    ROUTE SchalterZustand.isOn TO Licht4.set_on
+    ROUTE SchalterZustand.isOn TO Licht3.set_on
+    ROUTE SchalterZustand.isOn TO Licht2.set_on
+    ROUTE SchalterZustand.isOn TO Licht1.set_on
+
+    #Logik des Nachtszenarios
+    ROUTE SchalterNachszenario.isActive TO SchalterNachszenarioZustand.isClicked
+
+
+  }
+
+  #Fläche auf Dach des Krankenhauses
+  Transform {
+  rotation 1 0 0 1.57
+  translation -17.5 7.5 -0.49
+    children [
+      Shape {
+      #Damit man die Lichtkegel auf dem Boden sieht
+        appearance Appearance {
+          material Material {
+            diffuseColor .2 .2 .2
+          }
+        } #Appearance
+        geometry ElevationGrid {
+        xDimension 51
+        zDimension 31
+        xSpacing 0.5
+        zSpacing 0.5
+                  height [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+            	            0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+            	            0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+            	            0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+            	            0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+            	            0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+        ]
+      }
+    }
+  ]}
+
+  Transform {
+		#Hubschrauber 1
+		translation 0 0 0
+		children [
+      Transform{
+        rotation 1 0 0 1.57
+        children [Viewpoint {
+         description "Hubschrauber 1"
+         orientation 0 1 0 1.57
+         position -3.5 0.2 0
+        }
+        ]
+      }
+  			Hubschrauber {
+      mainColor 1.0 0.6 1.0
+      secondColor 0.1 0.2 1.0
+      }
+		]
+	}
+	Transform {
+		#Hubschrauber 2
+		rotation 0 0 1 0.34
+		translation -10 5 0
+		children [
+    Transform{
+      rotation 1 0 0 1.57
+      children [Viewpoint {
+       description "Hubschrauber 2"
+       orientation 0 1 0 1.7
+       position -5.5 4.5 0
+      }
+      ]
+    }
+  		Hubschrauber {
+      mainColor 0 0 1
+      secondColor 1 0 0
+      }
+		]
+	}
+	DEF Heli3 Transform {
+		#Hubschrauber 3
+		rotation 0 0 1 -0.55
+		translation -8 -4 0
+		children [
+    Transform{
+      rotation 1 0 0 1.57
+      children [Viewpoint {
+       description "Hubschrauber 3"
+       orientation 0 1 0 1.57
+       position -13.4 4 0
+      }
+      ]
+    }
+			Hubschrauber {
+      mainColor 1 0 0
+      secondColor 0 0 1
+      }
+		]
+	}
+	DEF Heli4 Transform {
+		#Hubschrauber 4
+		rotation 0 0 1 -0.1
+		translation -2 4	0
+		children [
+    Transform {
+      translation -3.2 0.2 0
+      rotation 0 0 1 3.2
+  		#Suchscheinwerfer
+  		children [
+        DEF Suchscheinwerfer SpotLight {
+        on FALSE
+        intensity 1.0
+        ambientIntensity 0.0
+        color 1 1 0
+        location 0.0 0.0 0.0
+        radius 10.0
+        attenuation 1.0 0.0 0.0
+        direction 1 0 -1
+        }
+  		]
+
+      #Binding
+      ROUTE SchalterNachszenarioZustand.isOn TO Suchscheinwerfer.set_on
+      ROUTE SchalterNachszenarioZustand.headlightOn TO Headlight.headlight
+
+  	}
+    Transform{
+      rotation 1 0 0 1.57
+      children [Viewpoint {
+       description "Hubschrauber 4"
+       orientation 0 1 0 1.57
+       position -3.5 0.2 0
+      }
+      ]
+    }
+			Hubschrauber {
+      mainColor 0.2 0.6 0.7
+      secondColor 0.4 0.3 1
+      }
+      DEF HeliClick TouchSensor { }
+		]
+	}
+
+    #Ab hier der Teil für etwaige Animationen
+    DEF HeliTime1 TimeSensor{
+      cycleInterval 30
+    }
+
+    DEF InterpolatorStart PositionInterpolator{
+      key [0 0.016 0.033 0.243 0.259 0.275 0.291 0.307 0.323 0.339 0.355 0.371 0.387 0.403 0.419 0.435 0.451 0.661 0.677 0.693 0.709 0.725 0.741 0.757 0.773 0.789 0.805 0.821 0.837 0.853 0.95 0.969 0.985 1]
+      keyValue[
+        -2 4 0
+        -2 4 2
+        -2 10 3
+        -19 10 3
+        -19.28 8.57 3
+        -19.56 7.14 3
+        -19.84 5.71 3
+        -20.12 4.28 3
+        -20.4 2.85 3
+        -21 0 3
+        -20.68 -1.42 3
+        -20.4 -2.85 3
+        -20.12 -4.28 3
+        -19.84 -5.71 3
+        -19.56 -7.14 3
+        -19.28 -8.57 3
+        -19 -10 3
+        19 -10 3
+        19.28 -8.57 3
+        19.56 -7.14 3
+        19.84 -5.71 3
+        20.12 -4.28 3
+        20.4 -2.85 3
+        21 0 3
+        20.68 1.42 3
+        20.4 2.85 3
+        20.12 4.28 3
+        19.84 5.71 3
+        19.56 7.14 3
+        19.28 8.57 3
+        -2 10 3
+        -2 4 2
+        -2 4 0
+      ]
+    }
+
+    DEF InterpolatorStart2 PositionInterpolator{
+      key [0 0.2 0.339 0.355 0.371 0.387 0.403 0.419 0.435 0.451 0.661 0.677 0.693 0.709 0.725 0.741 0.757 0.773 0.789 1]
+      keyValue[
+        -8 -4 0
+        -14 2 2
+        -21 0 3
+        -20.68 -1.42 3
+        -20.4 -2.85 3
+        -20.12 -4.28 3
+        -19.84 -5.71 3
+        -19.56 -7.14 3
+        -19.28 -8.57 3
+        -19 -10 3
+        19 -10 3
+        19.28 -8.57 3
+        19.56 -7.14 3
+        19.84 -5.71 3
+        20.12 -4.28 3
+        20.4 -2.85 3
+        21 0 3
+        18 0 1
+        15 0 0
+        -8 -4 0
+      ]
+    }
+
+    DEF HeliRotation2 OrientationInterpolator{
+      key [0 .125 0.25 .375 .5 .675 .75 1]
+      keyValue[
+        0 0 1 0.0
+        0 0 1 0.0
+        0 0 1 1.57
+        0 0 1 3.14
+        0 0 1 3.14
+        0 0 1 4.712
+        0 0 1 0.0
+        0 0 1 0.0
+      ]
+    }
+
+    DEF HeliTime2 TimeSensor{
+      cycleInterval 30
+    }
+
+    DEF SecondHeliTime TimeSensor{
+      cycleInterval 45
+    }
+
+    DEF SecondHeliTime2 TimeSensor{
+      cycleInterval 45
+    }
+
+    DEF HeliRotation OrientationInterpolator{
+      key [0 .27 .4 .61 .74 .87 1]
+      keyValue[
+        0 0 1 0.0
+        0 0 1 1.57
+        0 0 1 3.14
+        0 0 1 3.14
+        0 0 1 4.712
+        0 0 1 0.0
+        0 0 1 0.0
+      ]
+
+      ROUTE HeliClick.touchTime TO HeliTime1.startTime
+      ROUTE HeliClick.touchTime TO HeliTime2.startTime
+
+      ROUTE HeliTime1.fraction_changed TO InterpolatorStart.set_fraction
+      ROUTE InterpolatorStart.value_changed TO Heli4.set_translation
+
+      ROUTE HeliTime2.fraction_changed TO HeliRotation.set_fraction
+      ROUTE HeliRotation.value_changed TO Heli4.set_rotation
+
+
+      #Ab hier für Heli2, der hinterher fliegt
+
+      ROUTE HeliClick.touchTime TO SecondHeliTime.startTime
+      ROUTE HeliClick.touchTime TO SecondHeliTime2.startTime
+
+     ROUTE SecondHeliTime.fraction_changed TO InterpolatorStart2.set_fraction
+      ROUTE InterpolatorStart2.value_changed TO Heli3.set_translation
+
+      ROUTE SecondHeliTime2.fraction_changed TO HeliRotation2.set_fraction
+      ROUTE HeliRotation2.value_changed TO Heli3.set_rotation
+
+      #Ab hier Szenenverschönerung
+
+
+    }
+
+    Sound {
+    #Windsound
+     source AudioClip {
+        url ["wind.wav"]
+        loop TRUE
+     }
+     spatialize FALSE
+     intensity 0.5
+     minFront 50
+     maxFront 50
+     minBack 50
+     maxBack 50
+    }
+
+    Transform{
+    #Werbevideowand
+      rotation 0 0 1 0.5
+      translation -28 21 -17.5
+      children[
+      Shape {
+        #Werbevideowand
+        appearance Appearance {
+            material Material { }
+            texture MovieTexture {
+                url "Werbung.mpg"
+                loop TRUE
+                speed 1.0
+                startTime 0.0
+                stopTime 0.0
+            }
+        }
+        geometry Box {
+          size 10 0.5 6
+        }
+      }
+    ]
+  }
+]
+}

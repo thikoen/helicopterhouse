@@ -1,0 +1,240 @@
+#VRML V2.0 utf8
+
+PROTO Hubschrauber [
+	exposedField SFColor mainColor .8 .8 .8
+	exposedField SFColor secondColor .2 .3 .3
+	] {
+
+Transform {
+	#Hubschrauber
+	children [
+		DEF Hubschrauber Transform{
+			#Gesamter Hubschrauber
+			children [
+				DEF Rotor Transform{
+					#Rotor oben
+					translation -0.2 0.2 0.8
+					children [
+						Shape {
+							geometry Box {
+								size 5 0.1 0.1
+						}
+							appearance Appearance {
+								material Material {
+									diffuseColor 0 0 0
+									}
+								}
+						}
+						Shape {
+							geometry Box {
+								size 0.1 5 0.1
+								}
+								appearance Appearance {
+									material Material {
+									diffuseColor 0 0 0
+									}
+								}
+							}
+						]
+					}
+					DEF RotorHinten Transform {
+						#Rotor hinten am Heck
+						scale 0.3 0.3 0.3
+						rotation 1 0 0 1.57
+						translation 4.2 0.22 0.3
+						children [
+							USE Rotor
+						]
+					}
+					Transform {
+						#Mittelteil Chassis
+						children [
+							Shape {
+								geometry IndexedFaceSet {
+									coord Coordinate {point	[
+										-2.5 -0.45 -0.45 #Punkt A 0
+										-1.8 -0.35 -0.25 #Punkt B 1
+										0 -0.35 -0.25    #Punkt C 2
+										0 -0.35 0.75     #Punkt D 3
+										0 0.65 0.75      #Punkt E 4
+										0 0.65 -0.25     #Punkt F 5
+										-2.5 -0.45 0.75  #Punkt G 6
+										-2.5 0.95 0.75   #Punkt H 7
+										-2.5 0.95 -0.45  #Punkt I 8
+										-1.8 0.85 -0.25  #Punkt J 9
+									]}
+									coordIndex [	6 0 1 2 3 -1 #Mittelteil Vorne gross Gegen UZ
+											6 3 4 7 -1   #Mittelteil Oben gross
+											3 2 5 4 -1   #Mittelteil Hinten Klein Verbindungsstueck
+											6 7 8 0 -1   #Mittelteil Vorne Verbindung zur Kugel
+											7 4 5 9 8 -1 #Mittelteil gro� hinten
+											0 8 9 1 -1   #Mittelteil unten links
+											1 9 5 2 -1   #Mittelteil Unterseite
+										]
+									solid FALSE
+								} #IndexedFaceSet
+							appearance Appearance {
+								material Material {
+									diffuseColor IS secondColor
+									}
+								} #Appearance
+							}
+						]}
+
+						Transform {
+							#Mittelteil Kufen I
+							children [
+								Shape {
+									#Kufen links beide Ansichten
+									geometry IndexedFaceSet {
+										coord Coordinate {point	[
+											-1.8 -0.35 -0.25 #Punkt B 0
+											0 -0.35 -0.25    #Punkt C 1
+											-1.7 -0.35 -0.25 #Punkt U 2
+											-0.1 -0.35 -0.25 #Punkt V 3
+											-1.7 -0.35 -0.45 #Punkt W 4
+											-0.1 -0.35 -0.45 #Punkt X 5
+											-1.8 -0.35 -0.6  #Punkt Y 6
+											0 -0.35 -0.6     #Punkt Z 7
+										]}
+										coordIndex [	0 2 6 4 -1 #Mittelteil Kufen links aussen links
+												4 5 6 7 -1 #Mittelteil Kufen links aussen unten
+												3 1 7 5 -1 #Mittelteil Kufen links aussen rechts
+												4 6 2 0 -1 #Mittelteil Kufen links innen links
+												7 6 5 4 -1 #Mittelteil Kufen links innen unten
+												5 7 1 3 -1 #Mittelteil Kufen links innen rechts
+
+											]
+										solid FALSE
+									} #IndexedFaceSet
+								appearance Appearance {
+									material Material {
+										diffuseColor 0 0 0
+										}
+									} #Appearance
+								}
+							]
+						}
+
+						Transform {
+							#Mittelteil Kufen II
+							children [
+								Shape {
+									#Kufen rechts beide Ansichten
+									geometry IndexedFaceSet {
+										coord Coordinate {point	[
+											-1.8 0.65 -0.25 #Punkt J  0
+											0 0.65 -0.25    #Punkt F  1
+											-1.7 0.65 -0.25 #Punkt U' 2
+											-1.8 0.65 -0.6  #Punkt V' 3
+											0 0.65 -0.6     #Punkt W' 4
+											-0.1 0.65 -0.25 #Punkt X' 5
+											-0.1 0.65 -0.45 #Punkt Y' 6
+											-1.7 0.65 -0.45 #Punkt Z' 7
+										]}
+										coordIndex [	0 3 7 2 -1 #Mittelteil Kufen rechts aussen links
+												3 4 6 7 -1 #Mittelteil Kufen rechts aussen unten
+												5 6 4 1 -1 #Mittelteil Kufen rechts aussen rechts
+												2 7 3 0 -1 #Mittelteil Kufen rechts innen links
+												7 6 4 3 -1 #Mittelteil Kufen rechts innen unten
+												1 4 6 5 -1 #Mittelteil Kufen rechts innen rechts
+											]
+										solid FALSE
+									} #IndexedFaceSet
+								appearance Appearance {
+									material Material {
+										diffuseColor 0 0 0
+										}
+									} #Appearance
+								}
+							]
+						}
+						Transform {
+							children [
+							#Heck
+								Shape {
+									geometry IndexedFaceSet {
+										coord Coordinate {point	[
+											0 0 0        #Punkt A
+											4 0 0        #Punkt B
+											4 0 -0.4     #Punkt C
+											4.3 0 -0.4   #Punkt D
+											4.3 0 0.9    #Punkt E
+											4 0 0.9      #Punkt F
+											4 0 0.5      #Punkt G
+											0 0 0.5      #Punkt H
+											0 0.3 0.5    #Punkt I
+											4 0.3 0.5    #Punkt J
+											4 0.3 0.9    #Punkt K
+											4.3 0.3 0.9  #Punkt L
+											4.3 0.3 -0.4 #Punkt M
+											4 0.3 -0.4   #Punkt N
+											4 0.3 0      #Punkt O
+											0 0.3 0      #Punkt P
+										]}
+										coordIndex [ 	0 1 6 7 -1     #Heck Vorne Gross
+												8 7 6 9 -1     #Heck Oben Gross
+												2 3 4 5 -1     #Heck Hinten Vorne
+												4 3 12 11 -1   #Heck Hinten Hinten
+												5 4 11 10 -1   #Heck Hinten Oben klein
+												8 9 14 15 -1   #Heck Hinten Gross dh Rueckseite
+												7 8 15 0 -1    #Heck Vorne vorne klein
+												5 10 9 6 -1    #Heck Hinten vorne klein oben
+												1 14 13 2 -1   #Heck Hinten vorne klein unten
+												11 12 13 10 -1 #Heck Hinten Rueckseite
+												0 15 14 1 -1   #Heck unten gross
+												12 3 2 13 -1   #Heck hinten unten klein
+											]
+										solid FALSE
+									} #IndexedFaceSet
+								appearance Appearance {
+									material Material {
+										diffuseColor IS mainColor
+										}
+									} #Appearance
+								}
+							]
+						}
+						Transform {
+							#Hubschrauber Halbkugel
+						  translation -2.6 0.3 0.13
+						  children [
+						    Shape {
+						      	geometry Sphere   {
+						        		radius 0.7
+						      	}
+						      	appearance Appearance {
+						        	material Material {
+						          		diffuseColor IS mainColor
+						          		transparency 0.5 # halb durchsichtig
+						        	}
+						      	}
+						    	}
+								]
+							}
+			]
+		}
+	]
+}
+
+Group{
+	children[
+		#Rotation des Rotors
+		DEF timer TimeSensor{
+			cycleInterval 0.2
+			loop TRUE
+		}
+
+		DEF animatedRotorTop OrientationInterpolator{
+			key[0 1]
+			keyValue[0 0 1 0
+							0 0 1 3.14
+							]
+		}
+	]
+
+		ROUTE timer.fraction_changed TO animatedRotorTop.set_fraction
+		ROUTE animatedRotorTop.value_changed TO Rotor.rotation
+}
+
+}
